@@ -18,10 +18,10 @@ input, button { font-size: 1.2em; padding: 10px; margin: 10px; }
 <div id="points"></div>
 
 <script>
-const scriptURL = "https://script.google.com/macros/s/AKfycbxvg1qyUWU0aH_xRfjBZA4M9XcVeNI9foqrYgl28qsRNYcTdX_Q2-_h2lxA5Y7Pl3yWNw/exec";
+const scriptURL = "https://script.google.com/macros/s/AKfycbz9sU7b6N2tJ97XF0Menvgm88w33FcOtRinIrs46d7pnG_aclp_RwGmOrE2ZmSaQbIudw/exec";
 
 function getPoints(){
-    const cardId = document.getElementById("cardId").value;
+    const cardId = document.getElementById("cardId").value.trim();
     if(!cardId) return alert("Please enter Card ID");
     fetch(`${scriptURL}?action=get&cardId=${cardId}`)
     .then(res => res.json())
