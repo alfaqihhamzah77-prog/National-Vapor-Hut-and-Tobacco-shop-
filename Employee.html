@@ -26,12 +26,13 @@ input, button { font-size: 1.1em; padding: 10px; margin: 8px; }
 <div id="message"></div>
 
 <script>
-const scriptURL = "https://script.google.com/macros/s/AKfycbxvg1qyUWU0aH_xRfjBZA4M9XcVeNI9foqrYgl28qsRNYcTdX_Q2-_h2lxA5Y7Pl3yWNw/exec";
+const scriptURL = "https://script.google.com/macros/s/AKfycbz9sU7b6N2tJ97XF0Menvgm88w33FcOtRinIrs46d7pnG_aclp_RwGmOrE2ZmSaQbIudw/exec";
 
 function addPoints(){
-    const cardId = document.getElementById("cardId").value;
-    const amount = document.getElementById("amount").value;
-    const pass = document.getElementById("pass").value;
+    const cardId = document.getElementById("cardId").value.trim();
+    const amount = Number(document.getElementById("amount").value);
+    const pass = document.getElementById("pass").value.trim();
+    if(!cardId || !amount || !pass) return alert("Please fill all fields");
     fetch(`${scriptURL}?action=add&cardId=${cardId}&amount=${amount}&pass=${pass}`)
     .then(res=>res.json()).then(data=>{
         if(data.error) document.getElementById("message").innerText=data.error;
@@ -40,9 +41,10 @@ function addPoints(){
 }
 
 function redeemPoints(){
-    const cardId = document.getElementById("cardId").value;
-    const redeem = document.getElementById("redeem").value;
-    const pass = document.getElementById("pass").value;
+    const cardId = document.getElementById("cardId").value.trim();
+    const redeem = Number(document.getElementById("redeem").value);
+    const pass = document.getElementById("pass").value.trim();
+    if(!cardId || !redeem || !pass) return alert("Please fill all fields");
     fetch(`${scriptURL}?action=redeem&cardId=${cardId}&redeem=${redeem}&pass=${pass}`)
     .then(res=>res.json()).then(data=>{
         if(data.error) document.getElementById("message").innerText=data.error;
@@ -51,10 +53,11 @@ function redeemPoints(){
 }
 
 function addCustomer(){
-    const newCardId = document.getElementById("newCardId").value;
-    const newName = document.getElementById("newName").value;
-    const points = document.getElementById("initialPoints").value;
-    const pass = document.getElementById("pass").value;
+    const newCardId = document.getElementById("newCardId").value.trim();
+    const newName = document.getElementById("newName").value.trim();
+    const points = Number(document.getElementById("initialPoints").value);
+    const pass = document.getElementById("pass").value.trim();
+    if(!newCardId || !newName || !pass) return alert("Please fill all fields");
     fetch(`${scriptURL}?action=addCustomer&newCardId=${newCardId}&newName=${newName}&points=${points}&pass=${pass}`)
     .then(res=>res.json()).then(data=>{
         if(data.error) document.getElementById("message").innerText=data.error;
